@@ -61,11 +61,11 @@ export default class App extends Component {
     ]).start()
   }
   render() {
+
     const paddingAnimation = this.state.animatedPaddingBottomForFooter.interpolate({
       inputRange: [0, 1],
       outputRange: [0, 60]
     })
-
     return (
 
       <Provider store={store}>
