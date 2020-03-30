@@ -1,0 +1,123 @@
+[
+    {
+        "CategoryName": "آرایشی بهداشتی1",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": " آرایشی بهداشتی2",
+        "Icon": "../assets/images/women.png"
+    },
+    {
+        "CategoryName": "پاک کننده",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": "خوشبو کننده ",
+        "Icon": "../assets/images/women.png"
+    },
+    {
+        "CategoryName": "سلولزی",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": "شوینده",
+        "Icon": "../assets/images/women.png"
+    },
+    {
+        "CategoryName": "DPH سایر",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": "چاشنی",
+        "Icon": "../assets/images/women.png"
+    },
+    {
+        "CategoryName": "آردیجات",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": "برنج",
+        "Icon": "../assets/images/women.png"
+    },
+    {
+        "CategoryName": "پودریجات",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": "ترشیجات",
+        "Icon": "../assets/images/women.png"
+    },
+    {
+        "CategoryName": "تنقلات",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": "چای",
+        "Icon": "../assets/images/women.png"
+    },
+    {
+        "CategoryName": "روغن",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": "سرکه",
+        "Icon": "../assets/images/women.png"
+    },
+    {
+        "CategoryName": "سس",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": "شیرینیجات",
+        "Icon": "../assets/images/women.png"
+    },
+    {
+        "CategoryName": "صبحانه",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": "غلات",
+        "Icon": "../assets/images/women.png"
+    },
+    {
+        "CategoryName": "قند و شکر",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": "کنسرو",
+        "Icon": "../assets/images/women.png"
+    },
+    {
+        "CategoryName": "ماکارونی ",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": "تخم مرغ",
+        "Icon": "../assets/images/women.png"
+    },
+    {
+        "CategoryName": "خرما",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": "دسر و بستنی ",
+        "Icon": "../assets/images/women.png"
+    },
+    {
+        "CategoryName": "ساندویچ ",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": "غذای نیمه آماده",
+        "Icon": "../assets/images/women.png"
+    },
+    {
+        "CategoryName": "گوشت چرخ کرده ",
+        "Icon": "../assets/images/men.png"
+    },
+    {
+        "CategoryName": "لبنیات",
+        "Icon": "../assets/images/women.png"
+    }
+ 
+]
