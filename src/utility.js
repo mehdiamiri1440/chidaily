@@ -179,8 +179,8 @@ export const login = (username, password, captcha) => {
     })
 }
 export const isUserLogin = () => {
-    return new Promise((fullFill, eject) => {
-        appFetch(`https://www.cheegel.com/apis/api/user/isUserLogin`, {
+    return new Promise((fullFill, reject) => {
+        return appFetch(`http://www.cheegel.com/apis/api/user/isUserLogin`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json; charset=utf-8',
@@ -188,6 +188,8 @@ export const isUserLogin = () => {
             },
         }).then(response => {
             response.text().then(result => fullFill(JSON.parse(result)))
+        }).catch((error) => {
+            console.warn('api error', error)
         })
     })
 }

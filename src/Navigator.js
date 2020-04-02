@@ -1,12 +1,9 @@
-import 'react-native-gesture-handler'
 import React, { Component } from 'react'
 import { View, StatusBar, BackHandler, Image, Dimensions, Text, Animated, Easing } from "react-native";
-import { connect } from 'react-redux';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { addNavigationHelpers, NavigationActions } from 'react-navigation'
+import { connect } from 'react-redux'
+import { StackNavigator, addNavigationHelpers, NavigationActions } from 'react-navigation'
 import {
-  createReduxContainer,
+  createReduxBoundAddListener,
   createReactNavigationReduxMiddleware
 } from "react-navigation-redux-helpers";
 
@@ -45,7 +42,7 @@ export const middleware = createReactNavigationReduxMiddleware(
   "root",
   state => state.navigation
 );
-const addListener = createReduxContainer("root");
+const addListener = createReduxBoundAddListener("root");
 const transitionConfig = () => {
   return {
     transitionSpec: {
@@ -67,57 +64,55 @@ const transitionConfig = () => {
     },
   }
 }
-const Stack = createStackNavigator()
-// {
-//   [screenNames.SPLASH_SCREEN]: { screen: SplashScreen },
-//   [screenNames.INTRODUCTION]: { screen: Introduction },
-//   [screenNames.CMS]: { screen: CMS },
-//   [screenNames.ADVERTIMENT_CMS]: { screen: AdvertimentCMS },
-//   [screenNames.CONTACT_US]: { screen: ContactUs },
-//   [screenNames.PRODUCT]: { screen: Product },
-//   [screenNames.CATEGORY]: { screen: Category },
-//   [screenNames.PRODUCT_GALLERY]: { screen: ProductGallery },
-//   [screenNames.BUY_IT_NOW]: { screen: BuyItNow },
-//   [screenNames.ITEM_DETAILS]: { screen: ItemDetails },
-//   [screenNames.AGENTS]: { screen: Agents },
-//   [screenNames.BASKET]: { screen: Basket },
-//   [screenNames.POSTMAN]: { screen: Postman },
-//   [screenNames.LOGIN]: { screen: Login },
-//   [screenNames.SIGN_UP]: { screen: SignUp },
-//   [screenNames.SHOW_DETAIL]: { screen: ShowDetail },
-//   [screenNames.BASKET_PURCHASE_RESULT]: { screen: BasketPurchaseResult },
-//   [screenNames.PROFILE]: { screen: Profile },
-//   [screenNames.STORES]: { screen: Stores },
-//   [screenNames.BASKETPAYMENT]: { screen: BasketPurchaseResult },
-//   [screenNames.USERBASKET]: { screen: UserBaskets },
-//   [screenNames.INTRODUCER_INFO]: { screen: IntroducerInfo },
-//   [screenNames.REGISTER_USER_ACCOUNT_INFO]: { screen: RegisterUserAccountInfo },
-//   [screenNames.REGISTER_MARKETER_QUOTA]: { screen: RegisterMarketerQuota },
-//   [screenNames.VIEW_QOUTA_DETAILS]: { screen: ViewQoutaDetails },
-//   [screenNames.ABOUT_US]: { screen: AboutUs },
-//   [screenNames.REDIRECTION_HANDLER]: { screen: RedirectionHandler },
-// },
-// {
-//   initialRouteName: screenNames.SPLASH_SCREEN,
-//     transitionConfig
-//   // navigationOptions: {
-//   //   headerTitleStyle: {
-//   //     fontWeight: 'normal',
-//   //     fontFamily: fonts.BYekan,
-//   //     color: colors.textPrimary,
-//   //     alignSelf: 'center',
-//   //     textAlign: 'center'
-//   //   }
-//   // },
-// }
+export const Navigator = new StackNavigator({
+  [screenNames.SPLASH_SCREEN]: { screen: SplashScreen },
+  [screenNames.INTRODUCTION]: { screen: Introduction },
+  [screenNames.CMS]: { screen: CMS },
+  [screenNames.ADVERTIMENT_CMS]: { screen: AdvertimentCMS },
+  [screenNames.CONTACT_US]: { screen: ContactUs },
+  [screenNames.PRODUCT]: { screen: Product },
+  [screenNames.CATEGORY]: { screen: Category },
+  [screenNames.PRODUCT_GALLERY]: { screen: ProductGallery },
+  [screenNames.BUY_IT_NOW]: { screen: BuyItNow },
+  [screenNames.ITEM_DETAILS]: { screen: ItemDetails },
+  [screenNames.AGENTS]: { screen: Agents },
+  [screenNames.BASKET]: { screen: Basket },
+  [screenNames.POSTMAN]: { screen: Postman },
+  [screenNames.LOGIN]: { screen: Login },
+  [screenNames.SIGN_UP]: { screen: SignUp },
+  [screenNames.SHOW_DETAIL]: { screen: ShowDetail },
+  [screenNames.BASKET_PURCHASE_RESULT]: { screen: BasketPurchaseResult },
+  [screenNames.PROFILE]: { screen: Profile },
+  [screenNames.STORES]: { screen: Stores },
+  [screenNames.BASKETPAYMENT]: { screen: BasketPurchaseResult },
+  [screenNames.USERBASKET]: { screen: UserBaskets },
+  [screenNames.INTRODUCER_INFO]: { screen: IntroducerInfo },
+  [screenNames.REGISTER_USER_ACCOUNT_INFO]: { screen: RegisterUserAccountInfo },
+  [screenNames.REGISTER_MARKETER_QUOTA]: { screen: RegisterMarketerQuota },
+  [screenNames.VIEW_QOUTA_DETAILS]: { screen: ViewQoutaDetails },
+  [screenNames.ABOUT_US]: { screen: AboutUs },
+  [screenNames.REDIRECTION_HANDLER]: { screen: RedirectionHandler },
+},
+  {
+    initialRouteName: screenNames.SPLASH_SCREEN,
+    transitionConfig
+    // navigationOptions: {
+    //   headerTitleStyle: {
+    //     fontWeight: 'normal',
+    //     fontFamily: fonts.BYekan,
+    //     color: colors.textPrimary,
+    //     alignSelf: 'center',
+    //     textAlign: 'center'
+    //   }
+    // },
+  })
 
 class Nav extends Component {
   constructor(props) {
     super(props);
+    this.navigate = this.navigate.bind(this);
   }
-
-  navigator = React.createRef();
-  navigate = (route, params) => {
+  navigate(route, params) {
     const { dispatch } = this.props;
     dispatch(
       NavigationActions.navigate({
@@ -141,7 +136,7 @@ class Nav extends Component {
     dispatch(NavigationActions.back());
     return true;
   };
-  renderStatusBar = () => {
+  renderStatusBar() {
     let activeRoute = this.props.navigation.routes.filter(
       x => x.params.active
     )[0].routeName;
@@ -185,7 +180,7 @@ class Nav extends Component {
       />
     );
   }
-  renderFooter = () => {
+  renderFooter() {
     let activeRoute = this.props.navigation.routes.filter(
       x => x.params.active
     )[0].routeName;
@@ -210,25 +205,19 @@ class Nav extends Component {
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <NavigationContainer>
-
-          <Stack.Navigator
-            ref={this.navigator}
-            navigation={addNavigationHelpers({
-              dispatch: this.props.dispatch,
-              state: this.props.navigation,
-              addListener
-            })}
-          >
-            <Stack.Screen
-              name='SplashScreen'
-              component={SplashScreen}
-            />
-          </Stack.Navigator>
-          {this.renderFooter()}
-          {this.renderStatusBar()}
-        </NavigationContainer>
-      </View >
+        <Navigator
+          ref={nav => {
+            this.navigator = nav;
+          }}
+          navigation={addNavigationHelpers({
+            dispatch: this.props.dispatch,
+            state: this.props.navigation,
+            addListener
+          })}
+        />
+        {this.renderFooter()}
+        {this.renderStatusBar()}
+      </View>
     );
   }
 }
@@ -238,4 +227,5 @@ const mapStateToProps = state => ({
   initial: state.initial,
   dispatch: state.dispatch
 });
+
 export default connect(mapStateToProps)(Nav);

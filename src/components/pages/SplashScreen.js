@@ -80,10 +80,13 @@ class SplashScreen extends Component {
         //   "apkUrl":"http://www.cheegel.com/content/mobilesoftware/chidaily.apk",
         //   "forceUpdate": false
         // }
-        if (!__DEV__)
+        if (!__DEV__) {
             appUpdate.checkUpdate();
-        else
+        }
+        else {
             this.gotoNextPage()
+        }
+
     }
     setDefaultCityIdAndSupplierId() {
         let _that = this;
@@ -110,6 +113,7 @@ class SplashScreen extends Component {
 
     }
     gotoNextPage() {
+
         AsyncStorage.getItem("BasketActiveDuration").then(duration => {
             if (duration) {
                 if (new Date().getDay() > new Date(duration).getDay())
@@ -123,7 +127,9 @@ class SplashScreen extends Component {
                         this.props.updateSupplierId(parseInt(getUserInfo.SupplierID));
                         this.props.updateCityId(parseInt(getUserInfo.CityID));
                         getStoresList(this, parseInt(getUserInfo.CityID)).then(stores => {
+                            console.warn('before call user login')
                             isUserLogin().then(result => {
+                                console.warn('user login true')
                                 this.props.updateUserLogin(result)
                                 if (result)
                                     this.getUserInfo()
@@ -134,6 +140,9 @@ class SplashScreen extends Component {
                                 else {
                                     this.props.navigation.replace(screenNames.INTRODUCTION)
                                 }
+                            }).catch(() => {
+                                console.warn('user login false')
+                                return this.navigate(screenNames.LOGIN);
                             })
                         });
                     }

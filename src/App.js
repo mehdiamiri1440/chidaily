@@ -15,9 +15,14 @@ const store = createStore(reducers, applyMiddleware(logger, middleware))
 import styles, { colors } from './styles';
 import Footer from './components/common/Footer';
 import Tutorial from './components/common/Tutorial';
+
+import AppUpdate from 'react-native-appupdate';
 import { consts } from './utility'
+
 import DeviceInfo from 'react-native-device-info'
 import { screenNames } from './utility/consts';
+// var PushNotification = require('react-native-push-notification');
+
 
 export default class App extends Component {
   constructor(props) {
@@ -38,11 +43,34 @@ export default class App extends Component {
     );
   }
   componentDidMount() {
+    /*this.landingPages = {};
+    if (__DEV__) {
+      firebase.config().enableDeveloperMode();
+    }
+    firebase.config().setDefaults({
+      landingPages: "",
+    });
+    firebase.config().fetch(0)
+      .then(() => {
+        return firebase.config().activateFetched();
+      })
+      .then((activated) => {
+        return firebase.config().getValue('landingPages');
+      })
+      .then((snapshot) => {
+        this.landingPages = snapshot.val();
+      })
+      .catch(console.error);*/
 
   }
   componentWillUnmount() {
+
+    //BackHandler.removeEventListener('hardwareBackPress', this.onBackAndroid.bind(this));
   }
 
+  // onBackAndroid(e) {
+  //   alert('wrwerwer')
+  // }
   animate() {
     this.state.animatedPaddingBottomForFooter.setValue(0);
     const createAnimation = function (value, duration, easing, delay = 0) {
@@ -61,13 +89,20 @@ export default class App extends Component {
     ]).start()
   }
   render() {
-
     const paddingAnimation = this.state.animatedPaddingBottomForFooter.interpolate({
       inputRange: [0, 1],
       outputRange: [0, 60]
     })
+    //const store = configureStore()
+    //const store = createStore(reducers, {}, applyMiddleware(ReduxThunk))
     return (
-
+      // <Provider store={store}>
+      //   <Animated.View style={{ flex: 1, paddingBottom: paddingAnimation }}>
+      //     <Router />
+      //     <Footer />
+      //     <Tutorial />
+      //   </Animated.View>
+      // </Provider>
       <Provider store={store}>
         <View style={{ flex: 1, position: 'relative' }}>
           <Root>
@@ -77,5 +112,6 @@ export default class App extends Component {
       </Provider>
     );
   }
+
 
 }
